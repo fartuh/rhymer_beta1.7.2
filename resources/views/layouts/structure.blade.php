@@ -3,6 +3,10 @@
     <link href="{{ asset('css/bootstrap-mine.css')   }}"  rel="stylesheet">
 @endsection
 
+@section('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
+@endsection
+
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -78,4 +82,5 @@
 @endsection
 @yield('footer')
   </body>
+  @yield('scripts')
 </html>

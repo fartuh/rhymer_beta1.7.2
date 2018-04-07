@@ -50,11 +50,23 @@ class IndexController extends Controller
 
     public function newRhyme()
     {
-
+        return view('new');
     }
 
-    public function newRhymePost()
+    public function newRhymePost(Request $r)
     {
-        
+        $data = $r->validate([
+            'title' => 'required|min:8',
+            'text'  => 'required|min:25'
+        ]);
+        if(empty($errors)){
+            Rhyme::create([
+                'title'     => $r['title'],
+                'text'      => $r['text'],
+                'author_id' => Auth::id()
+            ]);
+        }
+
+        return view('new', ['data' => $data]);
     }
 }
