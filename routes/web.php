@@ -13,12 +13,13 @@
 
 Route::get('/', 'IndexController@index')->name('index');
 
-Route::get('/account/{id}', 'IndexController@findaccount');
+Route::get('/account/{id}', 'IndexController@findaccount')->name('findaccount');
 
 Route::get('/rhyme/{id}', 'IndexController@rhyme')->name('rhyme');
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/account', 'IndexController@account')->name('account');
+    Route::get('/logout', 'IndexController@logout')->name('logout');
 });
 
 

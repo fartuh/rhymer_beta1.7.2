@@ -8,7 +8,7 @@ class Rhyme extends Model
 {
     protected $table = 'rhymes';
 
-    public function user(){
+    public function author(){
         return $this->belongsTo('App\User');
     }
 }

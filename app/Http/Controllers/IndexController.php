@@ -17,13 +17,28 @@ class IndexController extends Controller
     
     public function account()
     {
-        $user = Rhyme::find(Auth::user()->id);
-        //dump($user);
-        return view('account', ['user' => $user]);
+        if(Auth::check()){
+            $user = User::find(Auth::id());
+            return view('account', ['user' => $user]);
+        }
     }
 
     public function findaccount($id)
     {
-        return view('findaccount');
+        $user = User::find($id);
+        return view('findaccount', ['user' => $user]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('index'));
+    }        
+    
+    public function rhyme($id)
+    {
+        $rhyme = Rhyme::with('author')->get()->find($id);
+        //dump($rhyme);
+        return view('rhyme', ['rhyme' => $rhyme]);
     }
 }

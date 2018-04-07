@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function user(){
+    public function rhyme(){
         return $this->hasOne('App\Rhyme', 'author_id', 'id');
     }
 }
