@@ -12,10 +12,15 @@
 */
 
 Route::get('/', 'IndexController@index')->name('index');
+Route::get('/rhymes', 'IndexController@index')->name('rhymes');
 
 Route::get('/account/{id}', 'IndexController@findaccount')->name('findaccount');
 
 Route::get('/rhyme/{id}', 'IndexController@rhyme')->name('rhyme');
+
+Route::get('/rhymes/mine', 'IndexController@rhymesme')->name('rhymesme');
+
+Route::get('/new/rhyme', 'IndexController@newRhyme')->name('new');
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/account', 'IndexController@account')->name('account');

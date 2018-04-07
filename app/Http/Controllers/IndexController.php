@@ -41,4 +41,20 @@ class IndexController extends Controller
         //dump($rhyme);
         return view('rhyme', ['rhyme' => $rhyme]);
     }
+
+    public function rhymesme()
+    {
+        $rhymes = Rhyme::all()->where('author_id', Auth::id());
+        return view('rhymesme', ['rhymes' => $rhymes]);
+    }
+
+    public function newRhyme()
+    {
+
+    }
+
+    public function newRhymePost()
+    {
+        
+    }
 }

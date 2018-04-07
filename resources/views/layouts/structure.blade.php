@@ -1,7 +1,12 @@
+@section('styles')
+    <link href="{{ asset('css/app.css')   }}"  rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-mine.css')   }}"  rel="stylesheet">
+@endsection
+
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link href="{{ asset('css/app.css')   }}"  rel="stylesheet">
+  @yield('styles')
   </head>
 
   <body>
@@ -27,18 +32,24 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/')   }}">Главная<span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/poems')  }}">Все стихи</a>
+        <a class="nav-link" href="{{ route('rhymes')  }}">Все рифмы</a>
       </li>
       <!--<li class="nav-item">
         <a class="nav-link" href="{{ url('/login')  }}">Регистрация/Авторизация</a>
       </li>-->
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/account')  }}">Аккаунт</a>
+        <a class="nav-link" href="{{ route('account')  }}">Аккаунт</a>
       </li>
+      @if(Auth::check())
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('new')  }}">Новая рифма</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('rhymesme')  }}">Мои рифмы</a>
+        </li>
+
+      @endif
     </ul>
   </div>
   </div>
