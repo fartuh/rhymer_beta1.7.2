@@ -15,20 +15,20 @@ class IndexController extends Controller
         return view('index', ['rhymes' => $rhymes->reverse()]);
     }
     
-    public function profile()
+    /*public function profile()
     {
         if(Auth::check()){
             $rhymes = Rhyme::all()->where('author_id', Auth::id());
             $user = User::find(Auth::id());
             return view('profile', ['user' => $user, 'rhymes' => $rhymes->reverse()]);
         }
-    }
+    }*/
 
-    public function findprofile($id)
+    public function profile($id)
     {
-        $rhymes = Rhyme::all()->where('author_id', Auth::id());
+        $rhymes = Rhyme::all()->where('author_id', $id);
         $user = User::find($id);
-        return view('findprofile', ['user' => $user, 'rhymes' => $rhymes->reverse]);
+        return view('profile', ['user' => $user, 'rhymes' => $rhymes->reverse()]);
     }
 
     public function logout()
