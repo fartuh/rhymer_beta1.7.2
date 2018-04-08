@@ -52,7 +52,7 @@
 
       @else
          <li class="nav-item">
-            <a class="nav-link" href="{{ route('profile')  }}">Авторизация/регистрация</a>
+            <a class="nav-link" href="{{ route('login')  }}">Авторизация/регистрация</a>
         </li>
       @endif
     </ul>
