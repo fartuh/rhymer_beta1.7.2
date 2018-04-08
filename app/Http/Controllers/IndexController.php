@@ -52,10 +52,9 @@ class IndexController extends Controller
     public function newRhymePost(Request $r)
     {
         $data = $r->validate([
-            'title' => 'required|min:8',
-            'text'  => 'required|min:20'
+            'title'   => 'required|min:8',
+            'text'    => 'required|min:20'
         ]);
-
         if(empty($errors)){
             $id = Rhyme::create([
                 'title'     => $r['title'],

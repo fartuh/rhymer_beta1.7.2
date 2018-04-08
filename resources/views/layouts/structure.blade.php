@@ -17,7 +17,7 @@
 @section('header')
   <div class="container">
     <div class="row">
-      <h1>header</h1>
+        <h1>{{ config('app.name', 'Rhymer') }}</h1>
     </div>
   </div>
 @endsection
@@ -77,7 +77,7 @@
 @section('footer')
   <div class="container">
     <div class="row">
-      <h1>footer</h1>
+      <h6>Copyright 2018 all rights reserved</h6>
     </div>
   </div>
 @endsection

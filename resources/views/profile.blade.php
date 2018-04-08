@@ -12,10 +12,10 @@
             <div class="w-100"></div>
             <h4>Дата создания аккаунта: {{ $user->created_at }}</h4>
             <div class="w-100"></div>
-            <h3>Рифмы</h3>
+            <h3>Рифмы:</h3>
             <div class="w-100"></div>
             @foreach($rhymes as $rhyme)
-                <h1><a href="{{ route('rhyme', ['id' => $rhyme->id]) }}">{{ $rhyme->title }}</a></h1>
+                <h4><a href="{{ route('rhyme', ['id' => $rhyme->id]) }}">{{ $rhyme->title }}</a></h4>
                 <div class="w-100"></div>
             @endforeach
        </div>        
