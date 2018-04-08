@@ -42,14 +42,18 @@
       <!--<li class="nav-item">
         <a class="nav-link" href="{{ url('/login')  }}">Регистрация/Авторизация</a>
       </li>-->
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('profile')  }}">Профиль</a>
-      </li>
       @if(Auth::check())
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('new')  }}">Новая рифма</a>
+            <a class="nav-link" href="{{ route('profile')  }}">Профиль</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('new')  }}">Новая рифма</a>
         </li>
 
+      @else
+         <li class="nav-item">
+            <a class="nav-link" href="{{ route('profile')  }}">Авторизация/регистрация</a>
+        </li>
       @endif
     </ul>
   </div>

@@ -7,7 +7,7 @@
             <h4>имя: {{ $user->name }}</h4>
             <div class="w-100"></div>
             <h4>Дата создания аккаунта: {{ $user->created_at }}</h4>
-            div class="w-100"></div>
+            <div class="w-100"></div>
             <h3>Рифмы</h3>
             <div class="w-100"></div>
             @foreach($rhymes as $rhyme)

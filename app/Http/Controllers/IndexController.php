@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function index()
     {
         $rhymes = Rhyme::all();
-        return view('index', ['rhymes' => $rhymes]);
+        return view('index', ['rhymes' => $rhymes->reverse()]);
     }
     
     public function profile()
@@ -20,7 +20,7 @@ class IndexController extends Controller
         if(Auth::check()){
             $rhymes = Rhyme::all()->where('author_id', Auth::id());
             $user = User::find(Auth::id());
-            return view('profile', ['user' => $user, 'rhymes' => $rhymes]);
+            return view('profile', ['user' => $user, 'rhymes' => $rhymes->reverse()]);
         }
     }
 
@@ -28,7 +28,7 @@ class IndexController extends Controller
     {
         $rhymes = Rhyme::all()->where('author_id', Auth::id());
         $user = User::find($id);
-        return view('findprofile', ['user' => $user, 'rhymes' => $rhymes]);
+        return view('findprofile', ['user' => $user, 'rhymes' => $rhymes->reverse]);
     }
 
     public function logout()
@@ -65,5 +65,19 @@ class IndexController extends Controller
         }
 
         return view('new', ['data' => $data]);
+    }
+
+    public function delete($id)
+    {
+        if(Auth::check())
+        {
+            if(Rhyme::find($id)->author->id == Auth::id()){
+                Rhyme::destroy([$id]);
+                return redirect(route('profile'));
+            } 
+            else {
+                return view('errors.try');
+            }   
+        }
     }
 }

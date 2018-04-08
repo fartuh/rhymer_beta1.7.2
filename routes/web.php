@@ -25,6 +25,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/profile', 'IndexController@profile')->name('profile');
     Route::get('/logout', 'IndexController@logout')->name('logout');
     Route::get('/new/rhyme', 'IndexController@newRhyme')->name('new');
+    Route::get('/delete/rhyme/{id}', 'IndexController@delete')->name('delete');
 });
 
 
