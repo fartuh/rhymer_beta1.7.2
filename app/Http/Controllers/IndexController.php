@@ -74,7 +74,7 @@ class IndexController extends Controller
         {
             if(Rhyme::find($id)->author->id == Auth::id()){
                 Rhyme::destroy([$id]);
-                return redirect(route('profile'));
+                return redirect(route('profile', ['id' => Auth::id()]));
             } 
             else {
                 return view('errors.try');
