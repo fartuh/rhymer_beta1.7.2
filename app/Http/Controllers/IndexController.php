@@ -53,15 +53,16 @@ class IndexController extends Controller
     {
         $data = $r->validate([
             'title' => 'required|min:8',
-            'text'  => 'required|min:25'
+            'text'  => 'required|min:20'
         ]);
 
         if(empty($errors)){
-            Rhyme::create([
+            $id = Rhyme::create([
                 'title'     => $r['title'],
                 'text'      => $r['text'],
                 'author_id' => Auth::id()
             ]);
+            return redirect(route('rhyme', ['id' => $id]));
         }
 
         return view('new', ['data' => $data]);
@@ -80,4 +81,31 @@ class IndexController extends Controller
             }   
         }
     }
+
+    public function editRhyme($id)
+    {
+        $rhyme = Rhyme::find($id);
+        return view('editRhyme', ['rhyme' => $rhyme, 'id' => $id]);
+    }
+
+    public function editRhymePost(Request $r)
+    {
+        $data = $r->validate([
+            'id'    => 'required',
+            'title' => 'required|min:8',
+            'text'  => 'required|min:20'
+        ]);
+        if(empty($errors))
+        {
+            $rhyme = Rhyme::find($data['id']);
+            $rhyme->title = $data['title'];
+            $rhyme->text = $data['text'];
+            $rhyme->save();
+            return redirect(route('rhyme', ['id' => $data['id']]));
+        }
+        else {
+            return redirect(route('index'));
+        }
+
+    } 
 }

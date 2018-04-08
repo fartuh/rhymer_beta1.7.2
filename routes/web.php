@@ -25,6 +25,7 @@ Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/profile', 'IndexController@profile')->name('profile');
     Route::get('/logout', 'IndexController@logout')->name('logout');
     Route::get('/new/rhyme', 'IndexController@newRhyme')->name('new');
+    Route::get('/edit/rhyme/{id}', 'IndexController@editRhyme')->name('edit');
     Route::get('/delete/rhyme/{id}', 'IndexController@delete')->name('delete');
 });
 
@@ -34,3 +35,4 @@ Auth::routes();
 //POST
 
 Route::post('/new/rhyme', 'IndexController@newRhymePost')->name('newPost');
+Route::post('/edit/rhyme', 'IndexController@editRhymePost')->name('editPost');
