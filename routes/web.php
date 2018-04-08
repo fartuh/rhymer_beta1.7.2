@@ -16,16 +16,15 @@
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/rhymes', 'IndexController@index')->name('rhymes');
 
-Route::get('/account/{id}', 'IndexController@findaccount')->name('findaccount');
+Route::get('/profile/{id}', 'IndexController@findprofile')->name('findprofile');
 
 Route::get('/rhyme/{id}', 'IndexController@rhyme')->name('rhyme');
 
 
 Route::middleware(['auth', 'web'])->group(function () {
-    Route::get('/account', 'IndexController@account')->name('account');
+    Route::get('/profile', 'IndexController@profile')->name('profile');
     Route::get('/logout', 'IndexController@logout')->name('logout');
     Route::get('/new/rhyme', 'IndexController@newRhyme')->name('new');
-    Route::get('/rhymes/mine', 'IndexController@rhymesme')->name('rhymesme');
 });
 
 

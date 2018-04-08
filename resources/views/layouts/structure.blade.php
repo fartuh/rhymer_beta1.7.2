@@ -43,14 +43,11 @@
         <a class="nav-link" href="{{ url('/login')  }}">Регистрация/Авторизация</a>
       </li>-->
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('account')  }}">Аккаунт</a>
+        <a class="nav-link" href="{{ route('profile')  }}">Профиль</a>
       </li>
       @if(Auth::check())
         <li class="nav-item">
           <a class="nav-link" href="{{ route('new')  }}">Новая рифма</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('rhymesme')  }}">Мои рифмы</a>
         </li>
 
       @endif
