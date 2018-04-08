@@ -3,8 +3,12 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <a href="{{ route('index') }}">На главную</a>   
             @if($rhyme->author->id == Auth::id())
+                <div class="w-100"></div>
                 <a onclick="return check()" href="{{ route('delete', ['id' => $rhyme->id]) }}">Удалить</a>   
+                <div class="w-100"></div>
+                <a href="{{ route('edit', ['id' => $rhyme->id]) }}">Редактировать</a>   
             @endif
             <div class="w-100"></div>
             <h1>{{ $rhyme->title }}</h1>
