@@ -15,6 +15,10 @@
             <div class="w-100"></div>
             <h3>{{ $rhyme->text }}</h3>
             <div class="w-100"></div>
+            @foreach($rhyme->categories as $category)
+                <a class="m-1" href="#"><h5 class="btn btn-primary">{{ $category->name }}</h5></a>                
+            @endforeach
+            <div class="w-100"></div>
             <h4>Автор: </h4><a href="{{ route('profile', ['id' => $rhyme->author->id]) }}"><h4>{{ $rhyme->author->name }}</h4></a>
         </div>    
     </div>

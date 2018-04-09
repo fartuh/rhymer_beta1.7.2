@@ -13,4 +13,8 @@ class Rhyme extends Model
     public function author(){
         return $this->belongsTo('App\User');
     }
+
+    public function categories(){
+        return $this->belongsToMany('App\Category');
+    }
 }

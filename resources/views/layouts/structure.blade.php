@@ -1,6 +1,7 @@
 @section('styles')
     <link href="{{ asset('css/app.css')   }}"  rel="stylesheet">
     <link href="{{ asset('css/bootstrap-mine.css')   }}"  rel="stylesheet">
+    <link href="{{ asset('css/main.css')   }}"  rel="stylesheet">
 @endsection
 
 @section('scripts')
