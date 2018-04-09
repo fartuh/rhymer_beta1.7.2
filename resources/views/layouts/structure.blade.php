@@ -24,8 +24,6 @@
 @yield('header')
 
 @section('nav')
-<div class="container">
-<div class="row">
 
 <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
@@ -58,8 +56,6 @@
     </ul>
   </div>
   </div>
-</div>
-</div>
 </div>
 </nav>
 @endsection
