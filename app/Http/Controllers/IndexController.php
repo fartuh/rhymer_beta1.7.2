@@ -67,31 +67,36 @@ class IndexController extends Controller
             ]);
             foreach($categories as $c){
                 $c = trim($c);
-                $check = DB::table('categories')->select('name')->where('name', $c)->get();
+                if($c == "" || $c == " ") continue;
+                $check = Category::where('name', $c)->get();
                 foreach($check as $ch){
-                    if($ch === "") $check_bool = true;
+                    if($ch->name != $c){
+                        $check_bool = false;
+                    }
+                    else {
+                        $check_bool = true;
+                        $category_id = (int)$ch->id;
+                    }
                 }
                 if(!isset($check_bool)) $check_bool = false;
                 if($check_bool)
                 {
+                    echo $category_id;
                     unset($chek_bool);
                 }
                 else{
 
-                    Category::create([
+                    $category_created = Category::create([
                         'name' => $c
                     ]);
+                    $category_id = $category_created->id;
                 }
 
-                $category = DB::table('categories')->select('id')->where('name', $c)->get();
-
-                foreach($category as $categ){
-                    $category_id = (int)$categ->id;
-                }
                 DB::table('category_rhyme')->insert([
                         'rhyme_id'    => $id->id,
                         'category_id' => $category_id
                     ]);
+                unset($check_bool);
             }
             
 
@@ -119,22 +124,66 @@ class IndexController extends Controller
     public function editRhyme($id)
     {
         $rhyme = Rhyme::find($id);
-        return view('editRhyme', ['rhyme' => $rhyme, 'id' => $id]);
+        $tags  = ""; 
+        foreach($rhyme->categories as $c){
+            $tags .= $c->name . ", ";
+        }
+        return view('editRhyme', ['rhyme' => $rhyme, 'id' => $id, 'tags' => $tags]);
     }
 
     public function editRhymePost(Request $r)
     {
         $data = $r->validate([
-            'id'    => 'required',
-            'title' => 'required|min:8',
-            'text'  => 'required|min:20'
+            'id'         => 'required',
+            'title'      => 'required|min:8',
+            'text'       => 'required|min:20',
+            'categories' => 'min:2'
         ]);
+
+        $categories     = explode(',', trim($data['categories']));  
         if(empty($errors))
         {
             $rhyme = Rhyme::find($data['id']);
             $rhyme->title = $data['title'];
             $rhyme->text = $data['text'];
             $rhyme->save();
+            
+            DB::table('category_rhyme')->where('rhyme_id', $rhyme->id)->delete();
+
+            foreach($categories as $c){
+                $c = trim($c);
+                if($c == "" || $c == " ") continue;
+                $check = Category::where('name', $c)->get();
+                foreach($check as $ch){
+                    if($ch->name != $c){
+                        $check_bool = false;
+                    }
+                    else {
+                        $check_bool = true;
+                        $category_id = (int)$ch->id;
+                    }
+                }
+                if(!isset($check_bool)) $check_bool = false;
+                if($check_bool)
+                {
+                    echo $category_id;
+                    unset($chek_bool);
+                }
+                else{
+
+                    $category_created = Category::create([
+                        'name' => $c
+                    ]);
+                    $category_id = $category_created->id;
+                }
+
+                DB::table('category_rhyme')->insert([
+                        'rhyme_id'    => $rhyme->id,
+                        'category_id' => $category_id
+                    ]);
+                unset($check_bool);
+            }
+            
             return redirect(route('rhyme', ['id' => $data['id']]));
         }
         else {
