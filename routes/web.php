@@ -35,3 +35,7 @@ Auth::routes();
 
 Route::post('/new/rhyme', 'IndexController@newRhymePost')->name('newPost');
 Route::post('/edit/rhyme', 'IndexController@editRhymePost')->name('editPost');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

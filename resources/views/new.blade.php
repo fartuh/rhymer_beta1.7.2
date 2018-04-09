@@ -24,6 +24,10 @@
                 <div class="w-100"></div>
                 <textarea class="form-control" name="text" cols="80" rows="5"></textarea>
                 <div class="w-100"></div>
+                <label>Категории</label>
+                <div class="w-100"></div>
+                <input class="form-control" placeholder="вводите через пробел" type="text" name="categories">
+                <div class="w-100"></div>
                 <label></label>
                 <div class="w-100"></div>
                 <input class="btn btn-primary" type="submit" value="Создать">

@@ -32,6 +32,6 @@ class CreateRhymeCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rhyme_category');
+        Schema::dropIfExists('category_rhyme');
     }
 }
