@@ -146,15 +146,16 @@ class IndexController extends Controller
 
     public function editRhymePost(Request $r)
     {
-        if(Rhyme::find($id)->author->id != Auth::id())
-            return view('errors.try');
-
+        
         $data = $r->validate([
             'id'         => 'required',
             'title'      => 'required|min:8',
             'text'       => 'required|min:20',
             'categories' => 'min:2'
         ]);
+
+        if(Rhyme::find($data['id'])->author->id != Auth::id())
+            return view('errors.try');
 
         $categories     = explode(',', trim($data['categories']));  
         if(empty($errors))
