@@ -129,16 +129,26 @@ class IndexController extends Controller
 
     public function editRhyme($id)
     {
-        $rhyme = Rhyme::find($id);
-        $tags  = ""; 
-        foreach($rhyme->categories as $c){
-            $tags .= $c->name . ", ";
+        if(Rhyme::find($id)->author->id == Auth::id()){
+            $rhyme = Rhyme::find($id);
+            $tags  = ""; 
+
+            foreach($rhyme->categories as $c){
+                $tags .= $c->name . ", ";
+            }
+
+            return view('editRhyme', ['rhyme' => $rhyme, 'id' => $id, 'tags' => $tags]);
         }
-        return view('editRhyme', ['rhyme' => $rhyme, 'id' => $id, 'tags' => $tags]);
+        else{
+            return view('errors.try');
+        }
     }
 
     public function editRhymePost(Request $r)
     {
+        if(Rhyme::find($id)->author->id != Auth::id())
+            return view('errors.try');
+
         $data = $r->validate([
             'id'         => 'required',
             'title'      => 'required|min:8',

@@ -28,6 +28,6 @@ class User extends Authenticatable
     ];
 
     public function rhyme(){
-        return $this->hasOne('App\Rhyme', 'author_id', 'id');
+        return $this->hasMany('App\Rhyme', 'author_id', 'id');
     }
 }
