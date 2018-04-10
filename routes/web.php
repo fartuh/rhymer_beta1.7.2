@@ -15,12 +15,11 @@
 
 Route::get('/', 'IndexController@index')->name('index');
 Route::get('/rhymes', 'IndexController@index')->name('rhymes');
+Route::get('/rhymes/tag/{tag}', 'SearchController@tag')->name('tag');
 
 Route::get('/profile/{id}', 'IndexController@profile')->name('profile');
 
 Route::get('/rhyme/{id}', 'IndexController@rhyme')->name('rhyme');
-
-Route::get('/tag/{tag}', 'SearchController@tag')->name('tag');
 
 
 Route::middleware(['auth', 'web'])->group(function () {
