@@ -14,7 +14,13 @@ class IndexController extends Controller
     public function index()
     {
         $rhymes = Rhyme::all();
-        return view('index', ['rhymes' => $rhymes->reverse()]);
+        $check  = true;
+
+        foreach($rhymes as $r){
+            if(isset($r->id)) $check = false;
+        }
+
+        return view('index', ['rhymes' => $rhymes->reverse(), 'check' => $check]);
     }
     
     /*public function profile()

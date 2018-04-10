@@ -26,7 +26,7 @@
                 <div class="w-100"></div>
                 <label>Метки</label>
                 <div class="w-100"></div>
-                <input class="form-control" placeholder="вводите через пробел" type="text" name="categories">
+                <input class="form-control" placeholder="вводите через запятую" type="text" name="categories">
                 <div class="w-100"></div>
                 <label></label>
                 <div class="w-100"></div>

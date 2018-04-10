@@ -20,6 +20,8 @@ Route::get('/profile/{id}', 'IndexController@profile')->name('profile');
 
 Route::get('/rhyme/{id}', 'IndexController@rhyme')->name('rhyme');
 
+Route::get('/tag/{tag}', 'SearchController@tag')->name('tag');
+
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/logout', 'IndexController@logout')->name('logout');
