@@ -44,8 +44,12 @@
       </li>-->
       @if(Auth::check())
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('feed') }}">Новости</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('profile', ['id' => Auth::id()])  }}">Профиль</a>
         </li>
+        
         <li class="nav-item">
             <a class="nav-link" href="{{ route('new')  }}">Новая рифма</a>
         </li>

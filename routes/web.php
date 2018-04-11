@@ -23,10 +23,13 @@ Route::get('/rhyme/{id}', 'IndexController@rhyme')->name('rhyme');
 
 
 Route::middleware(['auth', 'web'])->group(function () {
+    Route::get('/feed', 'UsersController@feed')->name('feed');
     Route::get('/logout', 'IndexController@logout')->name('logout');
     Route::get('/new/rhyme', 'IndexController@newRhyme')->name('new');
     Route::get('/edit/rhyme/{id}', 'IndexController@editRhyme')->name('edit');
     Route::get('/delete/rhyme/{id}', 'IndexController@delete')->name('delete');
+    Route::get('/subscribe/{id}', 'UsersController@subscribe')->name('subscribe');
+    Route::get('/unsubscribe/{id}', 'UsersController@unsubscribe')->name('unsubscribe');
 });
 
 

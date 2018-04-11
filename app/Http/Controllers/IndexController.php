@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
+    protected $id = 1;
+
     public function index()
     {
         $rhymes = Rhyme::all();
@@ -34,9 +36,21 @@ class IndexController extends Controller
 
     public function profile($id)
     {
+        $this->id  = $id;
+        $subscribe = false;
+
+        $check_r = DB::table('user_user')->select('id')->where([
+            'subscriber_id' => Auth::id(),
+            'author_id'     => $this->id
+        ])->get();
+        
+        foreach($check_r as $c){
+            if(isset($c->id)) $subscribe = true;
+        }
+
         $rhymes = Rhyme::all()->where('author_id', $id);
         $user = User::find($id);
-        return view('profile', ['user' => $user, 'rhymes' => $rhymes->reverse()]);
+        return view('profile', ['user' => $user, 'rhymes' => $rhymes->reverse(), 'subscribe' => $subscribe]);
     }
 
     public function logout()
