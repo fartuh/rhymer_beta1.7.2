@@ -7,6 +7,10 @@
             @if($user->id == Auth::id())
                 <a href="{{ route('logout') }}">Выйти</a>
                 <div class="w-100"></div>
+                <a href="{{ route('subscribeon') }}">На кого подписан</a>
+                <div class="w-100"></div>
+                <a href="{{ route('subscribers') }}">Подписчики</a>
+                <div class="w-100"></div>
             @endif
 
             @if($user->id != Auth::id())

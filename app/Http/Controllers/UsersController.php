@@ -12,6 +12,31 @@ class UsersController extends Controller
 {
     protected $id = 1;
 
+    public function profile($id)
+    {
+        $this->id  = $id;
+        $subscribe = false;
+
+        $check_r = DB::table('user_user')->select('id')->where([
+            'subscriber_id' => Auth::id(),
+            'author_id'     => $this->id
+        ])->get();
+        
+        foreach($check_r as $c){
+            if(isset($c->id)) $subscribe = true;
+        }
+
+        $user   = User::with('rhymes')->find($id);
+        $rhymes = $user->rhymes;
+        return view('profile', ['user' => $user, 'rhymes' => $rhymes->reverse(), 'subscribe' => $subscribe]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('index'));
+    }
+
     public function feed()
     {
         $users = User::find(Auth::id())->authors;
@@ -78,5 +103,37 @@ class UsersController extends Controller
 
             return redirect(route('profile', ['id' => $id]));
 
+    }
+
+    public function subscribeOn()
+    {
+        $check = true;
+
+        //$users = DB::table('user_user')->select('name')->where('subscriber_id', Auth::id());
+        
+        $users = User::whereHas('subscribers', function ($query) {
+            $query->where('subscriber_id', Auth::id());
+        })->get();
+        
+        foreach($users as $u){
+            if(isset($u->name)) $check = false;
+        }
+        return view('info', ['users' => $users, 'check' => $check]);
+    }
+    
+    public function subscribers()
+    {
+        $check = true;
+
+        //$users = DB::table('user_user')->select('name')->where('subscriber_id', Auth::id());
+        
+        $users = User::whereHas('authors', function ($query) {
+            $query->where('author_id', 'like', Auth::id());
+        })->get();
+        
+        foreach($users as $u){
+            if(isset($u->name)) $check = false;
+        }
+        return view('info', ['users' => $users, 'check' => $check]);
     }
 }
