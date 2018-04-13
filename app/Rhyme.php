@@ -17,4 +17,9 @@ class Rhyme extends Model
     public function categories(){
         return $this->belongsToMany('App\Category');
     }
+    
+    public function liked()
+    {
+        return $this->belongsToMany('App\User', 'user_like', 'rhyme_id', 'user_id');
+    }
 }

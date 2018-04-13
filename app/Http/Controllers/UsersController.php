@@ -136,4 +136,12 @@ class UsersController extends Controller
         }
         return view('info', ['users' => $users, 'check' => $check]);
     }
+
+    public function liked()
+    {
+        /*$users = User::whereHas('liked', function ($query) {
+            $query->where('rhyme_id', );
+        })->get();
+        dump($users);*/
+    }
 }
